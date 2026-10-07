@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#F4F8FC"
+    >
+
+    <meta
+        name="description"
+        content="ToDoList — organize suas tarefas de forma simples e intuitiva."
+    >
+
+    <title>ToDoList</title>
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Oxanium:wght@600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+</head>
+
+<body>
+
+    <div class="page-shell">
+
+        <main
+            class="app"
+            aria-labelledby="app-title"
+        >
+
+            <header class="app-header">
+
+                <div class="brand-area">
+
+                    <div class="brand-line">
+
+                        <span
+                            class="brand-mark"
+                            aria-hidden="true"
+                        ></span>
+
+                        <h1
+                            id="app-title"
+                            class="brand-title"
+                        >
+                            ToDoList
+                        </h1>
+
+                    </div>
+
+                    <p class="brand-subtitle">
+                        Escreva, ordene e faça acontecer.
+                    </p>
+
+                </div>
+
+                <section
+                    class="stats"
+                    aria-label="Estatísticas das tarefas"
+                >
+
+                    <div class="stat-pill stat-total">
+                        <strong id="stat-total">0</strong>
+                        <span id="stat-total-label">Total</span>
+                    </div>
+
+                    <div class="stat-pill stat-pending">
+                        <strong id="stat-pending">0</strong>
+                        <span id="stat-pending-label">Pendentes</span>
+                    </div>
+
+                    <div class="stat-pill stat-done">
+                        <strong id="stat-done">0</strong>
+                        <span id="stat-done-label">Feitas</span>
+                    </div>
+
+                </section>
+
+            </header>
+
+            <section
+                class="composer-card"
+                aria-label="Adicionar nova tarefa"
+            >
+
+                <div class="composer-main">
+
+                    <label
+                        class="sr-only"
+                        for="task-input"
+                    >
+                        Nova tarefa
+                    </label>
+
+                    <input
+                        id="task-input"
+                        class="task-input"
+                        type="text"
+                        maxlength="70"
+                        autocomplete="off"
+                        placeholder="Escreva aqui, o que precisa ser feito hoje?"
+                    >
+
+                    <div class="input-meta">
+
+                        <span
+                            id="character-counter"
+                            class="character-counter"
+                            aria-live="polite"
+                        >
+                            0/70
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="composer-actions">
+
+                    <span
+                        id="task-counter"
+                        class="task-counter"
+                        aria-live="polite"
+                    >
+                        0/10
+                    </span>
+
+                    <button
+                        id="add-task-btn"
+                        class="add-button"
+                        type="button"
+                    >
+
+                        <span
+                            class="add-icon"
+                            aria-hidden="true"
+                        >
+                            +
+                        </span>
+
+                        <span>
+                            Adicionar
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </section>
+
+            <section
+                class="task-section"
+                aria-label="Lista de tarefas"
+            >
+
+                <div
+                    id="task-list"
+                    class="task-list"
+                ></div>
+
+                <div
+                    id="empty-state"
+                    class="empty-state"
+                    hidden
+                >
+
+                    <div
+                        class="empty-note"
+                        aria-hidden="true"
+                    >
+                        <span class="empty-note-line"></span>
+                        <span class="empty-note-line short"></span>
+                        <span class="empty-check">✓</span>
+                    </div>
+
+                    <h2>
+                        Nenhuma tarefa por aqui.
+                    </h2>
+
+                    <p>
+                        Adicione sua primeira tarefa para começar.
+                    </p>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <div
+        id="delete-modal"
+        class="modal-overlay"
+        aria-hidden="true"
+    >
+
+        <div
+            class="delete-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="delete-modal-title"
+            aria-describedby="delete-modal-description"
+        >
+
+            <div class="modal-icon">
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    aria-hidden="true"
+                >
+                    <path
+                        d="M4 7h16M9 7V4.8c0-.4.4-.8.8-.8h4.4c.4 0 .8.4.8.8V7M7 7l.7 12a1 1 0 001 .9h6.6a1 1 0 001-.9L17 7M10 10.5v5.8M14 10.5v5.8"
+                        stroke-width="1.7"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                </svg>
+
+            </div>
+
+            <div class="modal-content">
+
+                <h2 id="delete-modal-title">
+                    Excluir tarefa?
+                </h2>
+
+                <p id="delete-modal-description">
+                    Você poderá desfazer a exclusão por alguns segundos.
+                </p>
+
+            </div>
+
+            <div class="modal-actions">
+
+                <button
+                    id="cancel-delete-btn"
+                    class="modal-button cancel-button"
+                    type="button"
+                >
+                    Cancelar
+                </button>
+
+                <button
+                    id="confirm-delete-btn"
+                    class="modal-button confirm-delete-button"
+                    type="button"
+                >
+                    Excluir
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div
+        id="toast-container"
+        class="toast-container"
+        aria-live="polite"
+        aria-atomic="false"
+    ></div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
